@@ -1,0 +1,22 @@
+<!-- templates/directory/subscriber_list.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>Subscribers</h2>
+<div>
+    {% for letter, subscribers in grouped_subscribers.items %}
+    <h3>{{ letter }}</h3>
+    <ul>
+        {% for subscriber in subscribers %}
+        <li>
+            {{ subscriber.last_name }} - {{ subscriber.phone_numbers }}
+            (<a href="{% url 'subscriber_detail' subscriber.pk %}">View</a> |
+            <a href="{% url 'subscriber_edit' subscriber.pk %}">Edit</a> |
+            <a href="{% url 'subscriber_delete' subscriber.pk %}">Delete</a>)
+        </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+</div>
+<a href="{% url 'subscriber_new' %}">Add new subscriber</a>
+{% endblock %}

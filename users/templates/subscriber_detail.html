@@ -1,0 +1,10 @@
+<!-- templates/directory/subscriber_detail.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h2>{{ subscriber.last_name }}</h2>
+<p>Phone Numbers: {{ subscriber.phone_numbers }}</p>
+<a href="{% url 'subscriber_edit' subscriber.pk %}">Edit</a>
+<a href="{% url 'subscriber_delete' subscriber.pk %}">Delete</a>
+<a href="{% url 'subscriber_list' %}">Back to list</a>
+{% endblock %}

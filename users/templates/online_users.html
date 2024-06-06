@@ -1,0 +1,15 @@
+<!-- templates/online_users.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Users</title>
+</head>
+<body>
+    <h1>Online Users</h1>
+    <ul id="online-users">
+        {% for user in online_users %}
+            <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

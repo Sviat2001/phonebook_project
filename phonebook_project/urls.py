@@ -1,5 +1,6 @@
-from users.api_views import UserLoginAPIView, UserRegistrationAPIView
-from users.views import SignUpView, CustomLoginView, UserProfileView
+from users import views
+from users.views import  UserProfileView, UserRegistrationAPIView, UserLoginAPIView, \
+    UserLogoutAPIView
 from django.contrib import admin
 from django.urls import path, include
 from drf_yasg.views import get_schema_view
@@ -18,16 +19,15 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', CustomLoginView.as_view(), name='login'),
-    path('accounts/register/', SignUpView.as_view(), name='signup'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('register/', UserRegistrationAPIView.as_view(), name='user-registration'),
+    path('login/', UserLoginAPIView.as_view(), name='user-login'),
+    path('logout/', UserLogoutAPIView.as_view(), name='user-logout'),
     path('directory/', include('directory.urls')),
     path('accounts/profile/', UserProfileView.as_view(), name='profile'),
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('api/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('api/accounts/register/', UserRegistrationAPIView.as_view(), name='api-register'),
-    path('api/accounts/login/', UserLoginAPIView.as_view(), name='api-login'),
+    path('online_users/', views.online_users_view, name='online_users'),
+    path('', include('chat.urls'))
 ]

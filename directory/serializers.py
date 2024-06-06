@@ -4,4 +4,5 @@ from .models import Subscriber
 class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscriber
-        fields = ['id', 'last_name', 'phone_numbers']
+        fields = ['id', 'user', 'last_name', 'phone_numbers']
+        read_only_fields = ['user']
